@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "url": "",
+        "statusCode": 401,
+        "statusText": "Unauthorized",
+        "headers": {}
+    },
+    "body": "{ \"errors\" :[{ \"key\" : \"userid\", \"value\" : \"already exists\" }]}"
+}

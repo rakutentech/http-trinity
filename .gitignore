@@ -1,0 +1,16 @@
+# Distribution
+# docs/js-compiled
+deployments
+
+# Dependency directories
+elm-stuff
+node_modules
+
+# elm repl generated files
+repl-temp-*
+
+# Desktop Services Store on macOS
+.DS_Store
+
+# Others
+npm-debug.log

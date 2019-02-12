@@ -1,0 +1,5 @@
+#!/bin/bash
+printf "\n\e[0;32m🍣   Starting \"elm-live\"...\e[0m\n\n"
+rm -rf docs/js-compiled
+cd examples
+../node_modules/.bin/elm-live Main.elm --dir=../docs --port=8001 --open=true --path-to-elm ../node_modules/.bin/elm -- --output=../docs/js-compiled/main.js 

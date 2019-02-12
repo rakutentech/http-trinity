@@ -1,0 +1,11 @@
+{
+    "metadata": {
+        "url": "",
+        "statusCode": 401,
+        "statusText": "Unauthorized",
+        "headers": {
+            "last-modified": "Sat, 24 Nov 2018 00:20:39 GMT"
+        }
+    },
+    "body": "{ \"errors\" :[{ \"key\" : \"age\", \"value\" : \"must be greater than 17\" },{ \"key\" : \"name\", \"value\" : \"must be at least 12 characters\" }]}"
+}
