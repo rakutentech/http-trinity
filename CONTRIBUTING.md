@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for considering contributing to http-extra!
+Thank you for considering contributing to http-trinity!
 
 When contributing to this repository, please first discuss the change you wish to make via issue,
 email, or any other method with the owners of this repository before making a change.

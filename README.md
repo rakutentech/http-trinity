@@ -2,7 +2,27 @@
 
 ## [Demo](https://rakutentech.github.io/http-trinity/)
 
-## Nº1 Http.Plus => Redefining Error and Response
+This library...
+
+* ..gives more visibility to the http response data. The general concept of Elm is to be friendly to beginners. So the default library, in line with this principle, tend to hide several details of the http response, for example the header of a response or the body, in case of error. This library, trying to keep a simple profile, return all the data as returned by the API server.
+* ..makes easy to test all use cases without the need to add and maintain an extra API mock server. Just creating example of responses and saving in static JSON files allow to test all possible scenarios of the application and refine all errors messages, for case when APIs return errors.
+* ..offers simple getters to access the response data. In a strictly typed environment is sometime cumbersome to reach down some nested structure. Getters overcome this issue.
+* ..provides a simple status wrapper (NotRequested, Fetching, Complete) that can be used in combination with the getters.
+
+## Possible improvements
+
+* Generate the use cases static JSON files directly from Swagger. There is already a project that [convert Swagger into Elm](https://github.com/ahultgren/swagger-elm).
+* Wrap completely the elm/http library, or rebuild this package on top of [https://package.elm-lang.org/packages/jzxhuang/http-extras/latest/](https://package.elm-lang.org/packages/jzxhuang/http-extras/latest/).
+
+## Details
+
+The library is composed of three small modules that expand the default Elm Http library:
+
+* Nº1 Http.Plus ⇒ Redefining Error and Response
+* Nº2 Http.Boxed ⇒ Mocking APIs the easy way
+* Nº3 Http.State ⇒ A simple wrapper
+
+## Nº1 Http.Plus ⇒ Redefining Error and Response
 
 Elm has an official Http package: [elm/http](https://package.elm-lang.org/packages/elm/http/latest) with support for [file uploading and a big bunch of simplifications](https://elm-lang.org/blog/working-with-files).
 
@@ -17,7 +37,7 @@ type Error
     | BadBody String
 ```
 
-For our purpose: 
+For our purpose:
 
 1. In case of `BadStatus`, we still need to access the entire response because the body contains error details and the header contains tokens that we need to send in the following requests
 2. In case of `BadBody`, similar issue: we still need to access the header
@@ -123,7 +143,7 @@ update msg model =
 ```
 
 
-## Nº2 Http.Boxed => Mocking APIs the easy way
+## Nº2 Http.Boxed ⇒ Mocking APIs the easy way
 
 Http.Boxed help to simulate all possible type or responses from the api server without actually installing any api server, but just mocking all passible responses.
 
@@ -222,7 +242,7 @@ In case the response doesn't contain any `boxed` response, it will be passed int
 ```
 
 
-## Nº3 Http.State => A simple wrapper
+## Nº3 Http.State ⇒ A simple wrapper
 
 The third helper is a simple wrapper that add a type around the request:
 
