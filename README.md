@@ -28,7 +28,7 @@ Elm has an official Http package: [elm/http](https://package.elm-lang.org/packag
 
 This is the error type this package produce, in case something goes wrong with an http request:
 
-```
+```elm
 type Error
     = BadUrl String
     | Timeout
@@ -46,7 +46,7 @@ As explained in the documentation, we can use `expectStringResponse` to get more
 
 So we created a slightly different type of error:
 
-```
+```elm
 type Error body
     = BadUrl String
     | Timeout
@@ -62,7 +62,7 @@ The differences are:
 `ResponseData` is defined as
 
 
-```
+```elm
 type ResponseData body
     = Decoded Http.Metadata body
     | Raw Http.Metadata String String
@@ -76,7 +76,7 @@ Here there are two possibilities
 
 In both the above cases, the type payload includes the header, the body and other meta data as defined in the new http package:
 
-```
+```elm
 type alias Metadata =
     { url : String
     , statusCode : Int
@@ -87,7 +87,7 @@ type alias Metadata =
 
 So the file type will be
 
-```
+```elm
 Result (Error body) (ResponseData body)
 ```
 
@@ -96,7 +96,7 @@ Result (Error body) (ResponseData body)
 from
 
 _(Example #1)_
-```
+```elm
 type Msg
   = GotText (Result Http.Error String)
 
@@ -119,7 +119,7 @@ update msg model =
 To
 
 _(Example #2)_
-```
+```elm
 type Msg
   = GotResponse (Result Http.Error (Http.Response String))
 
@@ -153,7 +153,7 @@ But what if we want to simulate, for example, a status code 401 (Unauthorized)?
 
 The idea is that, instead storing the body in the file, we store the entire response:
 
-```
+```json
 {
     "metadata": {
         "url": "",
@@ -171,7 +171,7 @@ Let's see how this can be done using `Http.Boxed` this way:
 Instead of building a request like:
 
 _(Example #1)_
-```
+```elm
 type Msg
   = GotText (Result Http.Error String)
 
@@ -194,7 +194,7 @@ update msg model =
 we need to add `Http.Boxed.unboxResponse` this way:
 
 _(Example #3)_
-```
+```elm
 type Msg
   = GotResponse (Result Http.Error (Http.Response String))
 
@@ -246,7 +246,7 @@ In case the response doesn't contain any `boxed` response, it will be passed int
 
 The third helper is a simple wrapper that add a type around the request:
 
-```
+```elm
 type State body
     = NotRequested
     | Fetching
@@ -260,7 +260,7 @@ It also duplicate all the getters of Http.Plus.
 
 
 _(Example #4)_
-```
+```elm
 type Msg
   = GotResponse (Result Http.Error (Http.Response String))
 
@@ -287,7 +287,7 @@ update msg model =
 
 Now let's suppose that you want to get the status code of the response regardless if it is successful or not and regardless if the body a good body or a bad body. This would be the way of doing it:
 
-```
+```elm
 statusCode =
     case state of
         Http.State.Complete result ->
@@ -319,7 +319,7 @@ statusCode =
 
 to help with this you can use a getter that works both with Http.State and Http.Plus:
 
-```
+```elm
 statusCode =
     Http.State.statusCode state
 ```
